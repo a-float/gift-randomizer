@@ -39,8 +39,7 @@ def login_post():
     remember = True if request.form.get('remember') else False
 
     user = User.query.filter_by(name=name).first()
-
-    if not user or user.password or not check_password_hash(user.password, password):
+    if not user or (not user.password or (not check_password_hash(user.password, password))):
         flash(Markup('Złe dane, spróbuj ponownie lub zarejestruj się <a href="'+url_for('auth.signup')+'" class="is-link">tutaj</a>.'))
         return redirect(url_for('auth.login')) # if the user doesn't exist or password is wrong, reload the page
 
