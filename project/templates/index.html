@@ -6,16 +6,22 @@
       <h1 class="title to_hide">
         Osoba, której kupisz prezent to 
       </h1>
-      <div id="count" style="margin-top:-20px; font-size:15rem;font-family: 'Langar', cursive;">10</div>
+      <div id="count" style="margin-top:-20px; font-size:15vw;font-family: 'Langar', cursive;">10</div>
         <h2 class="subtitle to_hide product">
           Wciśnij przycisk by dowiedzieć się komu dasz prezent.<br>
     Gdy wszyscy będą gotowi, nastąpi losowanie.
+        </h2>
+        <h2 class="subtitle to_hide product">
+          Gotowi {{ signed_count }}/5
         </h2>
         <button id="start_button" class="button is-medium is-danger product">Klik</button>
       </div>  
 {% else %}
       <h1 class="title"> Nie wszyscy są zarejestrowani.</h1>
       <h2 class="subtitle"> Gdy wszyscy ustawią swoje hasła rozpocznie się losowanie.</h2>
+      <h2 class="subtitle to_hide product">
+        Gotowi {{ signed_count }}/5
+      </h2>
 {% endif %}
       
 
@@ -54,7 +60,7 @@ function countdown(){
     
     setTimeout(function(){
       countdown();
-    }, 2000);
+    }, 1000);
     return false;
   }
 }
@@ -82,8 +88,8 @@ function countdown(){
 }
 
 .number-anim-class{
-  -webkit-animation: 2s ease-in-out 10 alternate "text-in";
-  animation: 2s ease-in-out 10 alternate "text-in";
+  -webkit-animation: 1s ease-in-out 10 alternate "text-in";
+  animation: 1s ease-in-out 10 alternate "text-in";
   /* animation-name: "text-in";
   animation-duration:2s;
   animation-iteration-count:10;

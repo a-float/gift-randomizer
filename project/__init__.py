@@ -30,5 +30,5 @@ def create_app():
     # blueprint for non-auth parts of app
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
-    app.debug = False
+    # app.debug = False
     return app

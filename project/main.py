@@ -19,7 +19,8 @@ def index():
     can_show_results = all_signed_in and gifts_are_set
     if all_signed_in and not gifts_are_set:
         pick_gifters()
-    return render_template("index.html", giftee=current_user.gifts if can_show_results else None)
+    signed_count = len(list(filter(lambda u: u.password is not None, users)))
+    return render_template("index.html", signed_count = signed_count, giftee=current_user.gifts if can_show_results else None)
 
 def are_self_gifts(tab1, tab2):
     for i in range(len(tab1)):
