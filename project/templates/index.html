@@ -1,6 +1,4 @@
 {% extends "base.html" %}
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet"> 
 
 {% block content %}
 {% if giftee %}
@@ -8,7 +6,7 @@
       <h1 class="title to_hide">
         Osoba, której kupisz prezent to 
       </h1>
-      <div id="count" style="margin-top:-20px;font-size: 15rem; font-family: 'Mountains of Christmas', cursive;">10</div>
+      <div id="count" style="margin-top:-20px; font-size:15rem;font-family: 'Langar', cursive;">10</div>
         <h2 class="subtitle to_hide product">
           Wciśnij przycisk by dowiedzieć się komu dasz prezent.<br>
     Gdy wszyscy będą gotowi, nastąpi losowanie.
@@ -17,6 +15,7 @@
       </div>  
 {% else %}
       <h1 class="title"> Nie wszyscy są zarejestrowani.</h1>
+      <h2 class="subtitle"> Gdy wszyscy ustawią swoje hasła rozpocznie się losowanie.</h2>
 {% endif %}
       
 
@@ -83,12 +82,18 @@ function countdown(){
 }
 
 .number-anim-class{
-  animation-name: "text-in";
+  -webkit-animation: 2s ease-in-out 10 alternate "text-in";
+  animation: 2s ease-in-out 10 alternate "text-in";
+  /* animation-name: "text-in";
   animation-duration:2s;
   animation-iteration-count:10;
-  animation-timing-function: ease-in-out
+  animation-timing-function: ease-in-out */
 }
-
+@-webkit-keyframes text-in {
+  0%    {transform: translateX(40%) rotate(180deg); opacity: 0;}
+  50%   {transform: translateX(0%); opacity: 1;}
+  100%  {transform: translateX(-40%) rotate(-180deg); opacity: 0;}
+}
 @keyframes text-in {
   0%    {transform: translateX(40%) rotate(180deg); opacity: 0;}
   50%   {transform: translateX(0%); opacity: 1;}
