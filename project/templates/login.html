@@ -12,6 +12,9 @@
         {% endif %}
         {% endwith %}
         <form method="POST" action="/login">
+            <div class="mb-4">
+                <p >Jeśli jeszcze tego nie zrobiłaś, zarejestruj się <a href="{{ url_for('auth.signup') }}">tutaj</a>.</p>
+            </div>
             <div class="field">
                 <div class="control">
                     <select class="input is-medium" name="name">
@@ -34,8 +37,9 @@
                     <input type="checkbox">  
                 </label>
             </div>
-            <button class="button is-block is-info is-large is-fullwidth">Login</button>
+            <button class="button is-block is-info is-large is-fullwidth">Zaloguj</button>
         </form>
+        
     </div>
 </div>
 {% endblock %}
