@@ -40,13 +40,7 @@ def login_post():
 
     user = User.query.filter_by(name=name).first()
 
-    if not user or user.password is None:
-        flash('Zarejestruj się.')
-        return redirect(url_for('auth.signup'))
-    # check if the user actually exists
-    # take the user-supplied password, hash it, and compare it to the hashed password in the database
-    if not user or not check_password_hash(user.password, password):
-
+    if not user or user.password not check_password_hash(user.password, password):
         flash(Markup('Złe dane, spróbuj ponownie lub zarejestruj się <a href="'+url_for('auth.signup')+'" class="is-link">tutaj</a>.'))
         return redirect(url_for('auth.login')) # if the user doesn't exist or password is wrong, reload the page
 
