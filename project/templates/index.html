@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet"> 
+
+{% block content %}
+{% if giftee %}
+    <div class="products">
+      <h1 class="title to_hide">
+        Osoba, której kupisz prezent to 
+      </h1>
+      <div id="count" style="margin-top:-20px;font-size: 15rem; font-family: 'Mountains of Christmas', cursive;">10</div>
+        <h2 class="subtitle to_hide product">
+          Wciśnij przycisk by dowiedzieć się komu dasz prezent.<br>
+    Gdy wszyscy będą gotowi, nastąpi losowanie.
+        </h2>
+        <button id="start_button" class="button is-medium is-danger product">Klik</button>
+      </div>  
+{% else %}
+      <h1 class="title"> Nie wszyscy są zarejestrowani.</h1>
+{% endif %}
+      
+
+{% if giftee %}
+<script type="text/javascript">
+var i = 10;
+
+let products_cnt = document.querySelector('.products');
+let products  = document.querySelectorAll('.product');
+const startButton = document.getElementById("start_button");
+
+products[0].addEventListener('transitioned', function() {
+  [...products].forEach((p) => {console.log("removed");p.parentNode.removeChild(p)})
+});
+
+let counting = false;
+startButton.addEventListener('click', function() {
+  this.setAttribute('disabled', 'disabled');
+  products_cnt.classList.add('products--delete');
+  countEle.setAttribute("class","number-anim-class")
+  countdown();
+  counting=true;
+});
+
+
+const countEle = document.getElementById('count');
+function countdown(){
+  if(i == 0){
+    countEle.innerHTML="{{ giftee }}";
+  }
+  while (i > 0) {
+    i -= 1;
+    // countEle.classList.remove("number-anim-class");
+    countEle.innerHTML=i;
+    // countEle.setAttribute("class","number-anim-class")
+    
+    setTimeout(function(){
+      countdown();
+    }, 2000);
+    return false;
+  }
+}
+</script>
+
+
+<style>
+  button {
+  cursor: pointer; }
+
+.products {
+  overflow: hidden; 
+}
+
+.product {
+  font-weight: bold;
+  transition: transform 1.5s 0s, opacity 1.25s 0s;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.products--delete .product {
+  transform: translateY(-50%) scale(0);
+  opacity: 0;
+}
+
+.number-anim-class{
+  animation-name: "text-in";
+  animation-duration:2s;
+  animation-iteration-count:10;
+  animation-timing-function: ease-in-out
+}
+
+@keyframes text-in {
+  0%    {transform: translateX(40%) rotate(180deg); opacity: 0;}
+  50%   {transform: translateX(0%); opacity: 1;}
+  100%  {transform: translateX(-40%) rotate(-180deg); opacity: 0;}
+}
+</style>
+{% endif %}
+{% endblock %}
