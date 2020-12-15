@@ -1,5 +1,3 @@
-from flask import Flask
-from flask_login import LoginManager
 from flask import Blueprint, render_template, url_for
 from flask_login import login_required, current_user
 from .models import User
@@ -45,28 +43,3 @@ def pick_gifters():
 @login_required
 def profile():
     return render_template('profile.html', name=current_user.name)
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '54AS5A6S53FA1S3AS3D1'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-
-db.init_app(app)
-login_manager = LoginManager()
-login_manager.login_view = 'auth.login'
-login_manager.init_app(app)
-
-from .models import User
-
-@login_manager.user_loader
-def load_user(user_id):
-    # since the user_id is just the primary key of our user table, use it in the query for the user
-    return User.query.get(int(user_id))
-
-# blueprint for auth routes in our app
-from .auth import auth as auth_blueprint
-app.register_blueprint(auth_blueprint)
-
-# blueprint for non-auth parts of app
-from .main import main as main_blueprint
-app.register_blueprint(main_blueprint)
-app.debug = False
