@@ -37,7 +37,7 @@ def login_post():
     name = request.form.get('name')
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
-
+    print(f"Logging with data: {name}, {password}, {remember}")
     user = User.query.filter_by(name=name).first()
     if not user or (not user.password or (not check_password_hash(user.password, password))):
         flash(Markup('Złe dane, spróbuj ponownie lub zarejestruj się <a href="'+url_for('auth.signup')+'" class="is-link">tutaj</a>.'))
